@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../../vendored/htmx.min.js"></script>
+    <script src="../../vendored/client-side-templates.js"></script>
+    <script src="../../vendored/mustache.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character</title>
+</head>
+<body>
+    <div hx-ext="client-side-templates">
+        <div 
+            id="character-details" 
+            hx-get="https://rickandmortyapi.com/api/character/4"
+            hx-target="#content" 
+            hx-swap="innerHTML" 
+            hx-trigger="load"
+            mustache-template="character-template"
+        ></div>
+
+        <div id="content"></div>
+
+        <template id="character-template">
+            <title>{{name}}</title>
+            <strong style="font-size: 20px;"><p>{{name}}</p></strong>
+            <p><strong>Species:</strong> {{species}}</p>
+            <p><strong>Status:</strong> {{status}}</p>
+            <p><strong>Gender:</strong> {{gender}}</p>
+            <img src="{{image}}" />
+        </template>
+    </div>
+    <script src="../ewJS/queriesScript.js"></script>
+</body>
+</html>

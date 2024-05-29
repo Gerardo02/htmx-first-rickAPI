@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="vendored/htmx.min.js"></script>
+    <script src="vendored/client-side-templates.js"></script>
+    <script src="vendored/mustache.js"></script>
+    <link rel="stylesheet" href="src/styles/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compa</title>
+</head>
+<body>
+    
+    <div hx-ext="client-side-templates">
+        <form 
+            hx-indicator="#indicator"
+            hx-get="https://rickandmortyapi.com/api/character"
+            hx-trigger="submit"
+            hx-target="#parent-div"
+            hx-swap="innerHTML"
+            hx-disabled-elt="button"
+            mustache-template="characters-template"
+            onsubmit="updateTemplate()"
+        >
+            
+            <select name="page" id="page-select">
+                <option value="1">Pagina 1</option>
+                <option value="2">Pagina 2</option>
+                <option value="3">Pagina 3</option>
+                <option value="4">Pagina 4</option>
+                <option value="5">Pagina 5</option>
+                <option value="6">Pagina 6</option>
+                <option value="7">Pagina 7</option>
+                <option value="8">Pagina 8</option>
+                <option value="9">Pagina 9</option>
+                <option value="10">Pagina 10</option>
+                <option value="11">Pagina 11</option>
+                <option value="12">Pagina 12</option>
+                <option value="13">Pagina 13</option>
+                <option value="14">Pagina 14</option>
+                <option value="15">Pagina 15</option>
+                <option value="16">Pagina 16</option>
+                <option value="17">Pagina 17</option>
+                <option value="18">Pagina 18</option>
+                <option value="19">Pagina 19</option>
+                <option value="20">Pagina 20</option>
+               
+            </select>
+            <button 
+                type="submit"
+            >
+                Generate Characters
+            </button>
+            <img id="indicator" class="htmx-indicator" src="imgs/loading.gif"/>
+
+        </form><br>
+        <div id="pages-header"></div>
+
+        <div id="parent-div"></div>
+        <template id="characters-template">
+            <h1 style="text-align: center;"></h1>
+            <div class="character-container">
+                {{#results}}
+                <div class="character">
+                    <strong style="font-size: 20px;"><p>{{name}}</p></strong>
+                    <p><strong>Status:</strong> {{status}}</p>
+                    <p><strong>Gender:</strong> {{gender}}</p>
+                    <a href="src/views/character.html?character={{id}}"><img src="{{image}}" /></a>
+                </div>
+                {{/results}}
+            </div>
+            
+        </template>
+    </div>
+
+    <script src="src/ewJS/headerPage.js"></script>
+</body>
+</html>
